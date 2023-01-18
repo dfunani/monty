@@ -1,1 +1,1 @@
-push g
+pass 1

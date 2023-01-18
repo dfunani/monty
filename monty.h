@@ -38,7 +38,7 @@ typedef struct instruction_s
 } instruction_t;
 
 extern instruction_t ops[];
-int check_ops(stack_t **, char *, unsigned int);
+void check_ops(stack_t **, char *, unsigned int);
 void push(stack_t **, unsigned int);
 void pall(stack_t **, unsigned int);
 stack_t *append_stack(stack_t **, int);

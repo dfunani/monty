@@ -8,7 +8,7 @@
  *
  */
 
-int check_ops(stack_t **stack, char *token, unsigned int line_num)
+void check_ops(stack_t **stack, char *token, unsigned int line_num)
 {
 	instruction_t ops[] = {
 		{"push", push},
@@ -22,8 +22,9 @@ int check_ops(stack_t **stack, char *token, unsigned int line_num)
 		if (!strcmp(ops[i].opcode, token))
 		{
 			(ops[i].f)(stack, line_num);
-			return (0);
+			return;
 		}
 	}
-	return (1);
+	fprintf(stderr, "L%u: unknown instruction %s\n", line_num, token);
+	exit(EXIT_FAILURE);
 }
