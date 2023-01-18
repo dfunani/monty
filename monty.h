@@ -46,4 +46,8 @@ stack_t *add_empty_stack(stack_t **, int);
 void free_stack(stack_t **);
 void pint(stack_t **, unsigned int);
 void pop(stack_t **, unsigned int);
+void swap(stack_t **, unsigned int);
+void add(stack_t **, unsigned int);
+void nop(stack_t **, unsigned int);
+
 #endif

@@ -14,6 +14,10 @@ void check_ops(stack_t **stack, char *token, unsigned int line_num)
 		{"push", push},
 		{"pall", pall},
 		{"pint", pint},
+		{"pop", pop},
+		{"add", add},
+		{"swap", swap},
+		{"nop", nop},
 		{NULL, NULL}
 	};
 	int i;
