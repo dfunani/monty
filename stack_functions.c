@@ -4,7 +4,7 @@
  * isNumber - check if a num is passed
  * @num: num to check
  *
- * return: 0 or 1
+ * Return: 0 or 1
  *
  */
 
@@ -12,9 +12,9 @@ int isNumber(char *num)
 {
 	unsigned int i;
 
-	for(i = 0; i < strlen(num); i++)
+	for (i = 0; i < strlen(num); i++)
 	{
-		if(!isdigit(num[i]))
+		if (!isdigit(num[i]))
 			return (0);
 	}
 	return (1);
@@ -33,26 +33,33 @@ void push(stack_t **stack, unsigned int line_number)
 	int stack_value;
 
 	token = strtok(NULL, " \n\t\r");
-	if(!token || !isNumber(token))
+	if (!token || !isNumber(token))
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	stack_value = atoi(token);
-	if(stack)
+	if (stack)
 		append_stack(stack, stack_value);
 	else
 		add_empty_stack(stack, stack_value);
 }
+
+/**
+ * pall - print all
+ * @stack: stack to print
+ * @line_number: ln to print
+ *
+ */
 
 void pall(stack_t **stack, unsigned int __attribute__((unused)) line_number)
 {
 	stack_t *head;
 
 	head = *stack;
-	if(head)
+	if (head)
 	{
-		while(head)
+		while (head)
 		{
 			printf("%d\n", head->n);
 			head = head->next;

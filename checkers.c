@@ -17,9 +17,9 @@ int check_ops(stack_t **stack, char *token, unsigned int line_num)
 	};
 	int i;
 
-	for(i = 0; ops[i].opcode != NULL; i++)
+	for (i = 0; ops[i].opcode != NULL; i++)
 	{
-		if(!strcmp(ops[i].opcode, token))
+		if (!strcmp(ops[i].opcode, token))
 		{
 			(ops[i].f)(stack, line_num);
 			return (0);

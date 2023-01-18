@@ -14,7 +14,7 @@ stack_t *add_empty_stack(stack_t **stack, int value)
 	stack_t *node;
 
 	node = malloc(sizeof(stack_t));
-	if(!node)
+	if (!node)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
@@ -22,12 +22,21 @@ stack_t *add_empty_stack(stack_t **stack, int value)
 	node->n = value;
 	node->prev = NULL;
 	node->next = *stack;
-	if(*stack)
+	if (*stack)
 	{
 		(*stack)->prev = node;
 	}
 	return (*stack);
 }
+
+/**
+ * append_stack - append stack with elem int
+ * @stack: stack to append
+ * @value: value to append
+ *
+ * Return: stack ptr
+ *
+ */
 
 stack_t *append_stack(stack_t **stack, int value)
 {
@@ -35,7 +44,7 @@ stack_t *append_stack(stack_t **stack, int value)
 	stack_t *head;
 
 	node = malloc(sizeof(stack_t));
-	if(!node)
+	if (!node)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
@@ -44,9 +53,9 @@ stack_t *append_stack(stack_t **stack, int value)
 	node->prev = NULL;
 	node->next = NULL;
 	head = *stack;
-	if(head)
+	if (head)
 	{
-		while(head->next)
+		while (head->next)
 			head = head->next;
 		node->prev = head;
 		head->next = node;
