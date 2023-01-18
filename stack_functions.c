@@ -87,3 +87,30 @@ void pint(stack_t **stack, unsigned int line_number)
 		(*stack) = (*stack)->next;
 	printf("%d\n", (*stack)->n);
 }
+
+/**
+ * pop - delete last item in stack
+ * @stack: stack to pop
+ * @line_number: ln
+ *
+ */
+
+void pop(stack_t **stack, unsigned int line_number)
+{
+	if (!stack)
+	{
+		fprintf(stderr, "L%u: can't pop an stack empty\n", line_number);
+		free_stack(stack);
+		exit(EXIT_FAILURE);
+	}
+	while ((*stack)->next)
+		(*stack) = (*stack)->next;
+	if ((*stack)->prev)
+		(*stack)->prev->next = NULL;
+	else
+	{
+		(*stack) = NULL;
+		(*stack)->next = NULL;
+	}
+	(*stack)->prev = NULL;
+}
