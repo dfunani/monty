@@ -67,3 +67,23 @@ void pall(stack_t **stack, unsigned int __attribute__((unused)) line_number)
 		}
 	}
 }
+
+/**
+ * pint - print last int
+ * @stack: print stack
+ * @line_number: print ln
+ *
+ */
+
+void pint(stack_t **stack, unsigned int line_number)
+{
+	if (!stack)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		free_stack(stack);
+		exit(EXIT_FAILURE);
+	}
+	while ((*stack)->next)
+		(*stack) = (*stack)->next;
+	printf("%d\n", (*stack)->n);
+}
