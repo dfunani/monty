@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
  * check_ops - checks what ops is given in a token line

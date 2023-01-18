@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
  * isNumber - check if a num is passed

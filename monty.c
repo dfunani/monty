@@ -1,4 +1,5 @@
-#include "main.h"
+#include "monty.h"
+
 /**
  * main - Program Entry Point
  * @argc: Program arg count
@@ -13,7 +14,10 @@ int main(int argc, char **argv)
 	FILE *monty;
 	char buffer[1028];
 	unsigned int line_num;
+	stack_t __attribute__((unused)) *stack;
+	char *token;
 
+	stack = NULL;
 	if(argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
@@ -29,7 +33,9 @@ int main(int argc, char **argv)
 	while(fgets(buffer, sizeof(buffer), monty))
 	{
 		line_num++;
-		printf(buffer);
+		token = strtok(buffer, " \n\r\t");
+		if(token)
+			check_ops(&stack, token, line_num);
 	}
 	return (0);
 }
