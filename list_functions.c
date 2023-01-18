@@ -25,9 +25,24 @@ void swap(stack_t **stack, unsigned int line_number)
 	(*stack)->n = temp;
 }
 
+/**
+ * add - add last 2 elems
+ * @stack: stack to swap ends
+ * @line_number: ln
+ *
+ */
+
 void add(stack_t __attribute__((unused)) **stack, unsigned int  __attribute__((unused)) line_number)
 {
+	
 }
+
+/**
+ * nop - swap last 2 elems
+ * @stack: stack to swap ends
+ * @line_number: ln
+ *
+ */
 
 void nop(stack_t  __attribute__((unused)) **stack, unsigned int  __attribute__((unused)) line_number)
 {
