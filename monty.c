@@ -38,5 +38,7 @@ int main(int argc, char **argv)
 		if (token)
 			check_ops(&stack, token, line_num);
 	}
+	fclose(monty);
+	free_stack(&stack);
 	return (0);
 }

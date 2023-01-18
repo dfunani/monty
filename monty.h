@@ -43,4 +43,6 @@ void push(stack_t **, unsigned int);
 void pall(stack_t **, unsigned int);
 stack_t *append_stack(stack_t **, int);
 stack_t *add_empty_stack(stack_t **, int);
+void free_stack(stack_t **);
+
 #endif

@@ -36,6 +36,7 @@ void push(stack_t **stack, unsigned int line_number)
 	if (!token || !isNumber(token))
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}
 	stack_value = atoi(token);
