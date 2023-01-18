@@ -1,35 +1,49 @@
 #include "monty.h"
 
 /**
- * check_ops - checks what ops is given in a token line
- * @stack: ptr to the stack (ref is passed in)
- * @token: ptr to the first sub string from strtok
- * @line_num: number indicating the line we are processing
+ * exec_opcode - executes or finds the opcode
+ * @stack: the stack
+ * @tok: the string bearing the opcode
+ * @ln: unsigned integer line number
  *
+ * Return: void
  */
-
-void check_ops(stack_t **stack, char *token, unsigned int line_num)
+void exec_opcode(stack_t **stack, char *tok, unsigned int ln)
 {
-	instruction_t ops[] = {
+	instruction_t codes[] = {
 		{"push", push},
 		{"pall", pall},
 		{"pint", pint},
 		{"pop", pop},
-		{"add", add},
 		{"swap", swap},
+		{"add", add},
 		{"nop", nop},
-		{NULL, NULL}
-	};
+		{"sub", sub},
+		{"mul", mul},
+		{"mod", mod},
+		{"div", divide},
+		{NULL, NULL}};
+		/**
+		 * {"rot1", rot1},
+		{"pchar", pchar},
+		{"pstr", pstr},
+		{"rotr", rotr},
+		{"queue", queue},
+		{"stack", stack1},
+		{NULL, NULL}};
+		*/
 	int i;
 
-	for (i = 0; ops[i].opcode != NULL; i++)
+	for (i = 0; codes[i].opcode != NULL; i++)
 	{
-		if (!strcmp(ops[i].opcode, token))
+		if (!strcmp(codes[i].opcode, tok))
 		{
-			(ops[i].f)(stack, line_num);
+			(codes[i].f)(stack, ln);
 			return;
 		}
 	}
-	fprintf(stderr, "L%u: unknown instruction %s\n", line_num, token);
+
+	fprintf(stderr, "L%u: unknown instruction %s\n", ln, tok);
+	deallocate(stack);
 	exit(EXIT_FAILURE);
 }

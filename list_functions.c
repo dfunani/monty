@@ -1,49 +1,176 @@
 #include "monty.h"
 
 /**
- * swap - swap last 2 elems
- * @stack: stack to swap ends
- * @line_number: ln
+ * add - adds the top two nodes of stack
+ * @stack: stack
+ * @line_number: unsigned int line number
  *
+ * Return: void
  */
-
-void swap(stack_t **stack, unsigned int line_number)
+void add(stack_t **stack, unsigned int line_number)
 {
-	int temp;
+	stack_t *dlist = *stack;
+	int sum;
 
 	if (!stack || !(*stack) || !((*stack)->next))
 	{
-		fprintf(stderr, "L%u: can't swap, stack too short\n",
-			line_number);
-		free_stack(stack);
+		deallocate(stack);
+		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	while ((*stack)->next->next)
-		(*stack) = (*stack)->next;
-	temp = (*stack)->next->n;
-	(*stack)->next->n = (*stack)->n;
-	(*stack)->n = temp;
+
+	while (dlist->next->next)
+		dlist = dlist->next;
+	sum = dlist->n + dlist->next->n;
+	pop(stack, line_number);
+	pop(stack, line_number);
+
+	if (!stack || !(*stack))
+		add_dnodeint(stack, sum);
+	else
+		add_nodeint_end(stack, sum);
+	free(dlist);
 }
 
 /**
- * add - add last 2 elems
- * @stack: stack to swap ends
- * @line_number: ln
+ * sub - subtracts the top two nodes of stack
+ * @stack: stack
+ * @line_number: unsigned int line number
  *
+ * Return: void
  */
-
-void add(stack_t __attribute__((unused)) **stack, unsigned int  __attribute__((unused)) line_number)
+void sub(stack_t **stack, unsigned int line_number)
 {
-	
+	stack_t *dlist = *stack;
+	int result;
+
+	if (!stack || !(*stack) || !((*stack)->next))
+	{
+		deallocate(stack);
+		fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	while (dlist->next->next)
+		dlist = dlist->next;
+	result = dlist->n - dlist->next->n;
+	pop(stack, line_number);
+	pop(stack, line_number);
+
+	if (!stack || !(*stack))
+		add_dnodeint(stack, result);
+	else
+		add_nodeint_end(stack, result);
+	free(dlist);
 }
 
 /**
- * nop - swap last 2 elems
- * @stack: stack to swap ends
- * @line_number: ln
+ * mul - multiplies the top two nodes of stack
+ * @stack: stack
+ * @line_number: unsigned int line number
  *
+ * Return: void
  */
-
-void nop(stack_t  __attribute__((unused)) **stack, unsigned int  __attribute__((unused)) line_number)
+void mul(stack_t **stack, unsigned int line_number)
 {
+	stack_t *dlist = *stack;
+	int result;
+
+	if (!stack || !(*stack) || !((*stack)->next))
+	{
+		deallocate(stack);
+		fprintf(stderr, "L%u: can't mul, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	while (dlist->next->next)
+		dlist = dlist->next;
+	result = dlist->n * dlist->next->n;
+	pop(stack, line_number);
+	pop(stack, line_number);
+
+	if (!stack || !(*stack))
+		add_dnodeint(stack, result);
+	else
+		add_nodeint_end(stack, result);
+	free(dlist);
+}
+
+/**
+ * divide - adds the top two nodes of stack
+ * @stack: stack
+ * @line_number: unsigned int line number
+ *
+ * Return: void
+ */
+void divide(stack_t **stack, unsigned int line_number)
+{
+	stack_t *dlist = *stack;
+	int result;
+
+	if (!stack || !(*stack) || !((*stack)->next))
+	{
+		deallocate(stack);
+		fprintf(stderr, "L%u: can't div, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	while (dlist->next->next)
+		dlist = dlist->next;
+
+	if (dlist->next->n == 0)
+	{
+		deallocate(stack);
+		fprintf(stderr, "L%u: division by zero\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	result = dlist->n / dlist->next->n;
+	pop(stack, line_number);
+	pop(stack, line_number);
+
+	if (!stack || !(*stack))
+		add_dnodeint(stack, result);
+	else
+		add_nodeint_end(stack, result);
+	free(dlist);
+}
+
+/**
+ * mod - finds the remainder
+ * @stack: stack
+ * @line_number: unsigned int line number
+ *
+ * Return: void
+ */
+void mod(stack_t **stack, unsigned int line_number)
+{
+	stack_t *dlist = *stack;
+	int result;
+
+	if (!stack || !(*stack) || !((*stack)->next))
+	{
+		deallocate(stack);
+		fprintf(stderr, "L%u: can't mod, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	while (dlist->next->next)
+		dlist = dlist->next;
+
+	if (dlist->next->n == 0)
+	{
+		deallocate(stack);
+		fprintf(stderr, "L%u: L<line_number>: division by zero\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	result = dlist->n % dlist->next->n;
+	pop(stack, line_number);
+	pop(stack, line_number);
+
+	if (!stack || !(*stack))
+		add_dnodeint(stack, result);
+	else
+		add_nodeint_end(stack, result);
+	free(dlist);
 }

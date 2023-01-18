@@ -1,116 +1,123 @@
 #include "monty.h"
 
 /**
- * isNumber - check if a num is passed
- * @num: num to check
+ * push - adds a new element to the stack
+ * @line_number: integer line number
+ * @stack: the stack
  *
- * Return: 0 or 1
- *
+ * Return: void
  */
-
-int isNumber(char *num)
-{
-	unsigned int i;
-
-	for (i = 0; i < strlen(num); i++)
-	{
-		if (!isdigit(num[i]))
-			return (0);
-	}
-	return (1);
-}
-
-/**
- * push - pushes to a stack obj
- * @stack: the stack obj to append
- * @line_number: the line number
- *
- */
-
 void push(stack_t **stack, unsigned int line_number)
 {
-	char *token;
-	int stack_value;
+	int value;
+	char *next_token = strtok(NULL, DELIMITER);
 
-	token = strtok(NULL, " \n\t\r");
-	if (!token || !isNumber(token))
+	if (next_token == NULL || isInteger(next_token))
 	{
+		deallocate(stack);
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}
-	stack_value = atoi(token);
-	if (stack)
-		append_stack(stack, stack_value);
-	else
-		add_empty_stack(stack, stack_value);
-}
 
-/**
- * pall - print all
- * @stack: stack to print
- * @line_number: ln to print
- *
- */
+	value = atoi(next_token);
 
-void pall(stack_t **stack, unsigned int __attribute__((unused)) line_number)
-{
-	stack_t *head;
-
-	head = *stack;
-	if (head)
+	if (!(*stack) || !stack)
 	{
-		while (head)
-		{
-			printf("%d\n", head->n);
-			head = head->next;
-		}
+		add_dnodeint(stack, value);
+	}
+	else
+	{
+		add_nodeint_end(stack, value);
 	}
 }
 
 /**
- * pint - print last int
- * @stack: print stack
- * @line_number: print ln
+ * pall - prints all the values on the stack starting from the top
+ * @stack: stack
+ * @line_number: interger line number
  *
+ * Return: void
  */
+void pall(stack_t **stack, unsigned int line_number)
+{
+	(void)line_number;
 
+	if (!stack || !(*stack))
+	{
+		return;
+	}
+
+	print_dlist(*stack);
+}
+
+/**
+ * pint - prints the top of the stack
+ * @stack: stack
+ * @line_number: integer line number
+ *
+ * Return: void
+ */
 void pint(stack_t **stack, unsigned int line_number)
 {
-	if (!stack)
+	stack_t *dlist = *stack;
+
+	if (!stack || !(*stack))
 	{
+		deallocate(stack);
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
-		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}
-	while ((*stack)->next)
-		(*stack) = (*stack)->next;
-	printf("%d\n", (*stack)->n);
+
+	while (dlist->next)
+		dlist = dlist->next;
+
+	printf("%d\n", dlist->n);
 }
 
 /**
- * pop - delete last item in stack
- * @stack: stack to pop
- * @line_number: ln
+ * pop - removes the element at the top of the stack
+ * @stack: stack
+ * @line_number: Error line number if any
  *
+ * Return: void
  */
-
 void pop(stack_t **stack, unsigned int line_number)
 {
-	if (!stack)
+	if (!stack || !(*stack))
 	{
+		deallocate(stack);
 		fprintf(stderr, "L%u: can't pop an stack empty\n", line_number);
-		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}
-	while ((*stack)->next)
-		(*stack) = (*stack)->next;
-	if ((*stack)->prev)
-		(*stack)->prev->next = NULL;
-	else
+
+	delete_dnodeint_end(stack);
+}
+
+/**
+ * swap - swaps the top two elements
+ * @stack: stack
+ * @line_number: Error line number if any
+ *
+ * Return: void
+ */
+void swap(stack_t **stack, unsigned int line_number)
+{
+	int temp;
+	stack_t *dlist;
+
+	if (!stack || !(*stack) || !((*stack)->next))
 	{
-		(*stack) = NULL;
-		(*stack)->next = NULL;
+		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+		deallocate(stack);
+		exit(EXIT_FAILURE);
 	}
-	(*stack)->prev = NULL;
+
+	while (dlist->next->next)
+	{
+		dlist = dlist->next;
+	}
+
+	temp = dlist->next->n;
+	dlist->next->n = dlist->n;
+	dlist->n = temp;
 }

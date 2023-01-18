@@ -6,7 +6,7 @@
  *
  * Return: void
  */
-void free_stack(stack_t **stack)
+void deallocate(stack_t **stack)
 {
 	stack_t *temp;
 
