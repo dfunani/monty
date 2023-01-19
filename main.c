@@ -1,5 +1,7 @@
 #include "monty.h"
 
+stack_t *stack = NULL;
+
 /**
  * main - monty programs entry point
  * @argc: stdin args count
