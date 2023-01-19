@@ -45,7 +45,8 @@ typedef void (*op_func)(stack_t **, unsigned int);
 void push(stack_t **, unsigned int);
 void pall(stack_t **, unsigned int);
 void pop(stack_t **, unsigned int);
-void pint(stack_t **stack, unsigned int line_number);
+void pint(stack_t **, unsigned int);
+void swap(stack_t **, unsigned int);
 
 /* Stack Arthemtic Operations */
 

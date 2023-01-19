@@ -95,6 +95,7 @@ void check_monty(char *opcode, char *value, int ln, int isQueue)
 		{"pall", pall},
 		{"pop", pop},
 		{"pint", pint},
+		{"swap", swap},
 		{NULL, NULL}
 	};
 
