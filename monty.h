@@ -49,7 +49,11 @@ void pint(stack_t **, unsigned int);
 void swap(stack_t **, unsigned int);
 
 /* Stack Arthemtic Operations */
-void add(stack_t **, unsigned int);
+void _add(stack_t **, unsigned int);
+void _sub(stack_t **, unsigned int);
+void _mul(stack_t **, unsigned int);
+void _div(stack_t **, unsigned int);
+void _mod(stack_t **, unsigned int);
 
 /* Helper functions */
 void nop(stack_t **, unsigned int);
