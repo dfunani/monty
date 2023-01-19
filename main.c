@@ -1,7 +1,5 @@
 #include "monty.h"
 
-stack_t *stack = NULL;
-
 /**
  * main - monty programs entry point
  * @argc: stdin args count
@@ -28,7 +26,7 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	file = fopen(argv[1], "r");
-	if(!argv[1] || !file)
+	if (!argv[1] || !file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		free_nodes();
@@ -45,7 +43,7 @@ int main(int argc, char **argv)
 
 /**
  * monty_parser - parses a monty line into tokens to for evaluate the ops code
- * @buffer: line from the file
+ * @monty: line from the file
  * @line_number: line number
  * @isQueue: Type of linked list - Queue or Stack
  *
@@ -67,7 +65,6 @@ int monty_parser(char *monty, int line_number, int isQueue)
 	if (!opcode)
 		return (isQueue);
 	value = strtok(NULL, "\n ");
-
 	if (strcmp(opcode, "stack") == 0)
 		return (0);
 	if (strcmp(opcode, "queue") == 0)

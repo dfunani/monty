@@ -2,12 +2,12 @@
 
 /**
  * push - push/add a node to the stack.
- * @new_node: Pointer to the new node.
- * @ln: token line number
+ * @node: Pointer to the new node.
+ * @line_number: token line number
  *
  */
 
-void push(stack_t **node, __attribute__((unused))unsigned int ln)
+void push(stack_t **node, __attribute__((unused))unsigned int line_number)
 {
 	stack_t *ptr;
 
