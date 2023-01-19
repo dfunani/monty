@@ -11,9 +11,9 @@ void push(stack_t **node, __attribute__((unused))unsigned int line_number)
 {
 	stack_t *ptr;
 
-	if (!node || !(*node))
+	if (node == NULL || (*node) == NULL)
 		exit(EXIT_FAILURE);
-	if (!stack)
+	if (stack == NULL)
 	{
 		stack = *node;
 		return;
@@ -31,15 +31,14 @@ void push(stack_t **node, __attribute__((unused))unsigned int line_number)
  *
  */
 
-void pall(stack_t **stack, unsigned int line_number)
+void pall(stack_t **stack, unsigned int __attribute__((unused)) line_number)
 {
 	stack_t *ptr;
 
-	(void) line_number;
 	if (stack == NULL)
 		exit(EXIT_FAILURE);
 	ptr = *stack;
-	while (ptr)
+	while (ptr != NULL)
 	{
 		printf("%d\n", ptr->n);
 		ptr = ptr->next;
@@ -57,7 +56,7 @@ void pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *ptr;
 
-	if (!stack || !(*stack))
+	if (stack == NULL || (*stack) == NULL)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n",
 				line_number);
@@ -66,7 +65,7 @@ void pop(stack_t **stack, unsigned int line_number)
 	}
 	ptr = *stack;
 	*stack = ptr->next;
-	if (*stack)
+	if (*stack != NULL)
 		(*stack)->prev = NULL;
 	free(ptr);
 }

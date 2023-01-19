@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	file = fopen(argv[1], "r");
-	if (!argv[1] || !file)
+	if (argv[1] == NULL || file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		free_nodes();
@@ -64,7 +64,7 @@ int monty_parser(char *monty, int line_number, int isQueue)
 		exit(EXIT_FAILURE);
 	}
 	opcode = strtok(monty, "\n ");
-	if (!opcode)
+	if (opcode == NULL)
 		return (isQueue);
 	value = strtok(NULL, "\n ");
 	if (strcmp(opcode, "stack") == 0)
@@ -136,7 +136,7 @@ void execute(op_func func, char *op, char *val, int ln, int isQueue)
 	neg = 1;
 	if (strcmp(op, "push") == 0)
 	{
-		if (val && val[0] == '-')
+		if (val != NULL && val[0] == '-')
 		{
 			val++;
 			neg = -1;
@@ -168,23 +168,20 @@ void execute(op_func func, char *op, char *val, int ln, int isQueue)
 }
 
 /**
- * new_node - Creates a node.
- * @n: Number to go inside the node.
- * Return: Upon sucess a pointer to the node. Otherwise NULL.
+ * free_nodes - Frees nodes in the stack.
  */
-stack_t *new_node(int n)
-{
-	stack_t *node;
 
-	node = malloc(sizeof(stack_t));
-	if (node == NULL)
+void free_nodes(void)
+{
+	stack_t *ptr;
+
+	if (stack == NULL)
+		return;
+
+	while (stack != NULL)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
-		free_nodes();
-		exit(EXIT_FAILURE);
+		ptr = stack;
+		stack = stack->next;
+		free(ptr);
 	}
-	node->next = NULL;
-	node->prev = NULL;
-	node->n = n;
-	return (node);
 }

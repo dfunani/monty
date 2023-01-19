@@ -1,21 +1,20 @@
 #include "monty.h"
 
-/**
- * free_nodes - Frees stack.
- */
-void free_nodes(void)
+stack_t *new_node(int n)
 {
-	stack_t *ptr;
+	stack_t *node;
 
-	if (!stack)
-		return;
-
-	while (stack)
+	node = malloc(sizeof(stack_t));
+	if (node == NULL)
 	{
-		ptr = stack;
-		stack = stack->next;
-		free(ptr);
+		fprintf(stderr, "Error: malloc failed\n");
+		free_nodes();
+		exit(EXIT_FAILURE);
 	}
+	node->next = NULL;
+	node->prev = NULL;
+	node->n = n;
+	return (node);
 }
 
 /**
@@ -23,6 +22,7 @@ void free_nodes(void)
  * @new_node: Pointer to the new node.
  * @ln: line number of the opcode.
  */
+
 void add_queue(stack_t **new_node, __attribute__((unused))unsigned int ln)
 {
 	stack_t *tmp;
