@@ -1,6 +1,6 @@
 #include "monty.h"
 
-stack_t *stack = NULL;
+stack_t *list = NULL;
 
 /**
  * main - monty programs entry point
@@ -94,6 +94,7 @@ void check_monty(char *opcode, char *value, int ln, int isQueue)
 		{"push", push},
 		{"pall", pall},
 		{"pop", pop},
+		{"pint", pint},
 		{NULL, NULL}
 	};
 
@@ -164,7 +165,7 @@ void execute(op_func func, char *op, char *val, int ln, int isQueue)
 			add_queue(&node, ln);
 	}
 	else
-		func(&stack, ln);
+		func(&list, ln);
 }
 
 /**
@@ -175,13 +176,13 @@ void free_nodes(void)
 {
 	stack_t *ptr;
 
-	if (stack == NULL)
+	if (list == NULL)
 		return;
 
-	while (stack != NULL)
+	while (list != NULL)
 	{
-		ptr = stack;
-		stack = stack->next;
+		ptr = list;
+		list = list->next;
 		free(ptr);
 	}
 }

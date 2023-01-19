@@ -13,15 +13,15 @@ void push(stack_t **node, __attribute__((unused))unsigned int line_number)
 
 	if (node == NULL || (*node) == NULL)
 		exit(EXIT_FAILURE);
-	if (stack == NULL)
+	if (list == NULL)
 	{
-		stack = *node;
+		list = *node;
 		return;
 	}
-	ptr = stack;
-	stack = *node;
-	stack->next = ptr;
-	ptr->prev = stack;
+	ptr = list;
+	list = *node;
+	list->next = ptr;
+	ptr->prev = list;
 }
 
 /**
@@ -68,4 +68,22 @@ void pop(stack_t **stack, unsigned int line_number)
 	if (*stack != NULL)
 		(*stack)->prev = NULL;
 	free(ptr);
+}
+
+/**
+ * pint - print top int
+ * @stack: ptr to stack
+ * @line_number: line num
+ *
+ */
+
+void pint(stack_t **stack, unsigned int line_number)
+{
+	if (stack == NULL || *stack == NULL)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		free_nodes();
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*stack)->n);
 }

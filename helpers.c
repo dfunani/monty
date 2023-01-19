@@ -29,12 +29,12 @@ void add_queue(stack_t **new_node, __attribute__((unused))unsigned int ln)
 
 	if (new_node == NULL || *new_node == NULL)
 		exit(EXIT_FAILURE);
-	if (stack == NULL)
+	if (list == NULL)
 	{
-		stack = *new_node;
+		list = *new_node;
 		return;
 	}
-	tmp = stack;
+	tmp = list;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 

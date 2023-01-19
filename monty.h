@@ -38,13 +38,14 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-extern stack_t *stack;
+extern stack_t *list;
 typedef void (*op_func)(stack_t **, unsigned int);
 
 /* Stack functions and operations */
 void push(stack_t **, unsigned int);
 void pall(stack_t **, unsigned int);
 void pop(stack_t **, unsigned int);
+void pint(stack_t **stack, unsigned int line_number);
 
 /* Stack Arthemtic Operations */
 
@@ -57,4 +58,5 @@ stack_t *new_node(int n);
 void execute(op_func, char *, char *, int, int);
 void check_monty(char *, char*, int, int);
 int monty_parser(char *, int, int);
+
 #endif
