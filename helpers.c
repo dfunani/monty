@@ -41,3 +41,16 @@ void add_queue(stack_t **new_node, __attribute__((unused))unsigned int ln)
 	tmp->next = *new_node;
 	(*new_node)->prev = tmp;
 }
+
+/**
+ * nop - Do Nothing
+ * @stack: Ptr to the stack
+ * @line_number: ln in file
+ *
+ */
+
+void nop(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+}

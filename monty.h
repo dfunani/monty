@@ -49,9 +49,10 @@ void pint(stack_t **, unsigned int);
 void swap(stack_t **, unsigned int);
 
 /* Stack Arthemtic Operations */
+void add(stack_t **, unsigned int);
 
 /* Helper functions */
-
+void nop(stack_t **, unsigned int);
 /* Default function - do nothing */
 void free_nodes(void);
 void add_queue(stack_t **, unsigned int);

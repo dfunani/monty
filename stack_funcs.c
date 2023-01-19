@@ -97,7 +97,7 @@ void pint(stack_t **stack, unsigned int line_number)
 
 void swap(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp;
+	stack_t *ptr;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
@@ -106,12 +106,12 @@ void swap(stack_t **stack, unsigned int line_number)
 		free_nodes();
 		exit(EXIT_FAILURE);
 	}
-	tmp = (*stack)->next;
-	(*stack)->next = tmp->next;
-	if (tmp->next != NULL)
-		tmp->next->prev = *stack;
-	tmp->next = *stack;
-	(*stack)->prev = tmp;
-	tmp->prev = NULL;
-	*stack = tmp;
+	ptr = (*stack)->next;
+	(*stack)->next = ptr->next;
+	if (ptr->next != NULL)
+		ptr->next->prev = *stack;
+	ptr->next = *stack;
+	(*stack)->prev = ptr;
+	ptr->prev = NULL;
+	*stack = ptr;
 }
