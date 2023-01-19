@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <stdarg.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -64,5 +65,11 @@ stack_t *new_node(int n);
 void execute(op_func, char *, char *, int, int);
 void check_monty(char *, char*, int, int);
 int monty_parser(char *, int, int);
+
+/* String functions */
+void print_char(stack_t **, unsigned int);
+void print_str(stack_t **, unsigned int);
+void rotl(stack_t **, unsigned int);
+void rotr(stack_t **, unsigned int);
 
 #endif

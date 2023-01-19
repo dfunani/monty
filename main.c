@@ -102,6 +102,10 @@ void check_monty(char *opcode, char *value, int ln, int isQueue)
 		{"div", _div},
 		{"mod", _mod},
 		{"mul", _mul},
+		{"pchar", print_char},
+		{"pstr", print_str},
+		{"rotl", rotl},
+		{"rotr", rotr},
 		{NULL, NULL}
 	};
 
